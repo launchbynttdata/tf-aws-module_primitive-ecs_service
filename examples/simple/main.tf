@@ -12,14 +12,14 @@
 
 module "vpc" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/vpc/aws"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   cidr_block = var.vpc_cidr_block
 }
 
 module "subnet1" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/subnet/aws"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   vpc_id            = module.vpc.vpc_id
   cidr_block        = var.subnet1_cidr_block
@@ -28,7 +28,7 @@ module "subnet1" {
 
 module "subnet2" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/subnet/aws"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   vpc_id            = module.vpc.vpc_id
   cidr_block        = var.subnet2_cidr_block
@@ -37,7 +37,7 @@ module "subnet2" {
 
 module "security_group" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/security_group/aws"
-  version = "0.2.0"
+  version = "~> 0.2"
 
   vpc_id      = module.vpc.vpc_id
   name_prefix = var.security_group_name_prefix
@@ -45,7 +45,7 @@ module "security_group" {
 
 module "ingress_rule" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_ingress_rule/aws"
-  version = "0.1.0"
+  version = "~> 0.1"
 
   security_group_id = module.security_group.id
   ip_protocol       = var.ingress_ip_protocol
@@ -56,7 +56,7 @@ module "ingress_rule" {
 
 module "egress_rule" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_egress_rule/aws"
-  version = "0.1.0"
+  version = "~> 0.1"
 
   security_group_id = module.security_group.id
   ip_protocol       = var.egress_ip_protocol
@@ -71,7 +71,7 @@ resource "aws_ecs_cluster" "this" {
 
 module "ecs_task" {
   source  = "terraform.registry.launch.nttdata.com/module_collection/ecs_task/aws"
-  version = "1.0.0"
+  version = "~> 1.0"
 
   ecs_task_family = var.ecs_task_family
   container_name  = var.container_name

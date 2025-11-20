@@ -12,8 +12,8 @@
 
 locals {
   network_configuration = {
-    subnets          = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
-    security_groups  = [aws_security_group.this.id]
-    assign_public_ip = false
+    subnets          = [module.subnet1.subnet_id, module.subnet2.subnet_id]
+    security_groups  = [module.security_group.id]
+    assign_public_ip = var.assign_public_ip
   }
 }

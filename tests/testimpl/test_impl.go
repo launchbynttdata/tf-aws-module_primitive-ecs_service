@@ -33,7 +33,7 @@ func TestComposableComplete(t *testing.T, ctx testTypes.TestContext) {
 
 	// Get outputs from Terraform
 	serviceName := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_name")
-	clusterName := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_cluster")
+	clusterName := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_cluster_name")
 	desiredCountStr := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_desired_count")
 	taskDefinition := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_task_definition")
 	launchType := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_launch_type")
@@ -70,7 +70,7 @@ func testECSServiceExists(t *testing.T, ecsClient *ecs.Client, serviceName, clus
 
 	service := result.Services[0]
 	assert.Equal(t, serviceName, *service.ServiceName, "Service name should match")
-	// Note: ClusterArn is the full ARN, clusterName might be name or ARN
+	// Note: ClusterArn is the full ARN, clusterName is the name
 	assert.Contains(t, *service.ClusterArn, clusterName, "Cluster ARN should contain the cluster name")
 	assert.NotEmpty(t, service.ServiceArn, "Service ARN should not be empty")
 }

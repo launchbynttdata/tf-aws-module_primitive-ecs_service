@@ -12,17 +12,22 @@
 
 output "vpc_id" {
   description = "The ID of the VPC"
-  value       = aws_vpc.this.id
+  value       = module.vpc.vpc_id
 }
 
 output "subnet_ids" {
   description = "The IDs of the subnets"
-  value       = [aws_subnet.subnet1.id, aws_subnet.subnet2.id]
+  value       = [module.subnet1.subnet_id, module.subnet2.subnet_id]
 }
 
 output "security_group_id" {
   description = "The ID of the security group"
-  value       = aws_security_group.this.id
+  value       = module.security_group.id
+}
+
+output "ecs_cluster_name" {
+  description = "The name of the ECS cluster"
+  value       = aws_ecs_cluster.this.name
 }
 
 output "ecs_service_id" {

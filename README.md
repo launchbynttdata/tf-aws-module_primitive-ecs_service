@@ -53,12 +53,6 @@ module "ecs_service" {
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.0 |
 
-## Providers
-
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.0 |
-
 ## Modules
 
 No modules.
@@ -122,7 +116,7 @@ No modules.
 | <a name="output_service_registries"></a> [service\_registries](#output\_service\_registries) | The effective service registries configuration of the ECS service (includes Service Connect registry if configured) |
 | <a name="output_service_connect_service_arn"></a> [service\_connect\_service\_arn](#output\_service\_connect\_service\_arn) | ARN of the Service Connect service discovered via data source (if lookup is configured) |
 | <a name="output_service_connect_service_discovery_name"></a> [service\_connect\_service\_discovery\_name](#output\_service\_connect\_service\_discovery\_name) | Discovery name of the Service Connect service (from configuration) |
-| <a name="output_capacity_provider_strategy"></a> [capacity_provider_strategy](#output\_capacity_provider_strategy) | The capacity provider strategy of the ECS service |
+| <a name="output_capacity_provider_strategy"></a> [capacity\_provider\_strategy](#output\_capacity\_provider\_strategy) | The capacity provider strategy of the ECS service |
 | <a name="output_placement_constraints"></a> [placement\_constraints](#output\_placement\_constraints) | The placement constraints of the ECS service |
 | <a name="output_placement_strategy"></a> [placement\_strategy](#output\_placement\_strategy) | The placement strategy of the ECS service |
 | <a name="output_volume_configuration"></a> [volume\_configuration](#output\_volume\_configuration) | The volume configuration of the ECS service |

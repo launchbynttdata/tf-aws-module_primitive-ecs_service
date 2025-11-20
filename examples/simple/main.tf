@@ -10,59 +10,76 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-resource "aws_vpc" "this" {
-  cidr_block = "10.0.0.0/16"
+module "vpc" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/vpc/aws"
+  version = "1.0.0"
+
+  cidr_block = var.vpc_cidr_block
 }
 
-resource "aws_subnet" "subnet1" {
-  vpc_id            = aws_vpc.this.id
-  cidr_block        = "10.0.1.0/24"
+module "subnet1" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/subnet/aws"
+  version = "1.0.0"
+
+  vpc_id            = module.vpc.vpc_id
+  cidr_block        = var.subnet1_cidr_block
   availability_zone = var.availability_zone
 }
 
-resource "aws_subnet" "subnet2" {
-  vpc_id            = aws_vpc.this.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-east-2b"
+module "subnet2" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/subnet/aws"
+  version = "1.0.0"
+
+  vpc_id            = module.vpc.vpc_id
+  cidr_block        = var.subnet2_cidr_block
+  availability_zone = var.subnet2_availability_zone
 }
 
-resource "aws_security_group" "this" {
-  name_prefix = "ecs-service-sg-"
-  vpc_id      = aws_vpc.this.id
+module "security_group" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/security_group/aws"
+  version = "0.2.0"
 
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  vpc_id      = module.vpc.vpc_id
+  name_prefix = var.security_group_name_prefix
+}
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+module "ingress_rule" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_ingress_rule/aws"
+  version = "0.1.0"
+
+  security_group_id = module.security_group.id
+  ip_protocol       = var.ingress_ip_protocol
+  from_port         = var.ingress_from_port
+  to_port           = var.ingress_to_port
+  cidr_ipv4         = var.ingress_cidr_ipv4
+}
+
+module "egress_rule" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_egress_rule/aws"
+  version = "0.1.0"
+
+  security_group_id = module.security_group.id
+  ip_protocol       = var.egress_ip_protocol
+  from_port         = var.egress_from_port
+  to_port           = var.egress_to_port
+  cidr_ipv4         = var.egress_cidr_ipv4
 }
 
 resource "aws_ecs_cluster" "this" {
-  name = "my-cluster"
+  name = var.ecs_cluster_name
 }
 
-resource "aws_ecs_task_definition" "this" {
-  family                   = "my-task-definition"
-  requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
+module "ecs_task" {
+  source  = "terraform.registry.launch.nttdata.com/module_collection/ecs_task/aws"
+  version = "1.0.0"
 
-  container_definitions = jsonencode([
-    {
-      name      = "my-container"
-      image     = "nginx:latest"
-      essential = true
-    }
-  ])
+  ecs_task_family = var.ecs_task_family
+  container_name  = var.container_name
+  container_image = var.container_image
+
+  # Let the module create the roles instead of providing ARNs
+  create_task_role      = true
+  create_execution_role = true
 }
 
 module "ecs_service" {
@@ -70,7 +87,7 @@ module "ecs_service" {
 
   name                  = var.name
   cluster               = aws_ecs_cluster.this.arn
-  task_definition       = aws_ecs_task_definition.this.arn
+  task_definition       = module.ecs_task.task_definition_arn
   desired_count         = var.desired_count
   network_configuration = local.network_configuration
 }

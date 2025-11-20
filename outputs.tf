@@ -72,7 +72,7 @@ output "network_configuration" {
 
 output "load_balancer_configuration" {
   description = "The load balancer configuration of the ECS service"
-  value       = local.has_load_balancer ? var.load_balancer : []
+  value       = var.load_balancer
 }
 
 output "service_connect_configuration" {
@@ -98,17 +98,17 @@ output "service_connect_service_discovery_name" {
 
 output "capacity_provider_strategy" {
   description = "The capacity provider strategy of the ECS service"
-  value       = local.has_capacity_provider_strategy ? var.capacity_provider_strategy : []
+  value       = var.capacity_provider_strategy
 }
 
 output "placement_constraints" {
   description = "The placement constraints of the ECS service"
-  value       = local.has_placement_constraints ? var.placement_constraints : []
+  value       = var.placement_constraints
 }
 
 output "placement_strategy" {
   description = "The placement strategy of the ECS service"
-  value       = local.has_placement_strategy ? var.ordered_placement_strategy : []
+  value       = var.ordered_placement_strategy
 }
 
 output "volume_configuration" {

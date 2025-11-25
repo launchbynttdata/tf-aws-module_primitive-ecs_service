@@ -25,8 +25,9 @@ locals {
   has_network_configuration = var.network_configuration != null
 
   # Service Connect configuration processing
-  service_connect_enabled            = var.service_connect_configuration != null && var.service_connect_configuration.enabled
-  service_connect_service_configured = local.service_connect_enabled && var.service_connect_configuration.service != null
+  service_connect_enabled = var.service_connect_configuration != null ? var.service_connect_configuration.enabled : false
+
+  service_connect_service_configured = local.service_connect_enabled && (var.service_connect_configuration != null ? var.service_connect_configuration.service != null : false)
 
   # Load balancer configuration processing
   has_load_balancer = length(var.load_balancer) > 0

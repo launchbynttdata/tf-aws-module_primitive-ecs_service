@@ -119,7 +119,7 @@ variable "health_check_grace_period_seconds" {
   default     = null
 
   validation {
-    condition     = var.health_check_grace_period_seconds == null || (var.health_check_grace_period_seconds >= 0 && var.health_check_grace_period_seconds <= 2147483647)
+    condition     = var.health_check_grace_period_seconds == null ? true : (var.health_check_grace_period_seconds >= 0 && var.health_check_grace_period_seconds <= 2147483647)
     error_message = "Health check grace period must be between 0 and 2147483647 seconds."
   }
 }
@@ -393,17 +393,19 @@ variable "volume_configuration" {
   default = null
 
   validation {
-    condition = var.volume_configuration == null || (
-      var.volume_configuration.managed_ebs_volume.size_in_gb >= 1 &&
-      var.volume_configuration.managed_ebs_volume.size_in_gb <= 16384
+    condition = var.volume_configuration == null ? true : (
+      var.volume_configuration.managed_ebs_volume.size_in_gb == null ? true : (
+        var.volume_configuration.managed_ebs_volume.size_in_gb >= 1 &&
+        var.volume_configuration.managed_ebs_volume.size_in_gb <= 16384
+      )
     )
     error_message = "EBS volume size must be between 1 and 16384 GB."
   }
 
   validation {
-    condition = var.volume_configuration == null || contains([
-      "standard", "gp2", "gp3", "io1", "io2", "sc1", "st1"
+    condition = var.volume_configuration == null ? true : contains([
+      "gp2", "gp3", "io1", "io2", "sc1", "st1"
     ], var.volume_configuration.managed_ebs_volume.volume_type)
-    error_message = "EBS volume type must be one of: standard, gp2, gp3, io1, io2, sc1, st1."
+    error_message = "EBS volume type must be one of: gp2, gp3, io1, io2, sc1, st1."
   }
 }

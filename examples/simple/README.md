@@ -41,13 +41,13 @@ terraform destroy -var-file=test.tfvars
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform.registry.launch.nttdata.com/module_primitive/vpc/aws | 1.0.0 |
-| <a name="module_subnet1"></a> [subnet1](#module\_subnet1) | terraform.registry.launch.nttdata.com/module_primitive/subnet/aws | 1.0.0 |
-| <a name="module_subnet2"></a> [subnet2](#module\_subnet2) | terraform.registry.launch.nttdata.com/module_primitive/subnet/aws | 1.0.0 |
-| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform.registry.launch.nttdata.com/module_primitive/security_group/aws | 0.2.0 |
-| <a name="module_ingress_rule"></a> [ingress\_rule](#module\_ingress\_rule) | terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_ingress_rule/aws | 0.1.0 |
-| <a name="module_egress_rule"></a> [egress\_rule](#module\_egress\_rule) | terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_egress_rule/aws | 0.1.0 |
-| <a name="module_ecs_task"></a> [ecs\_task](#module\_ecs\_task) | terraform.registry.launch.nttdata.com/module_collection/ecs_task/aws | 1.0.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | terraform.registry.launch.nttdata.com/module_primitive/vpc/aws | ~> 1.0 |
+| <a name="module_subnet1"></a> [subnet1](#module\_subnet1) | terraform.registry.launch.nttdata.com/module_primitive/subnet/aws | ~> 1.0 |
+| <a name="module_subnet2"></a> [subnet2](#module\_subnet2) | terraform.registry.launch.nttdata.com/module_primitive/subnet/aws | ~> 1.0 |
+| <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform.registry.launch.nttdata.com/module_primitive/security_group/aws | ~> 0.2 |
+| <a name="module_ingress_rule"></a> [ingress\_rule](#module\_ingress\_rule) | terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_ingress_rule/aws | ~> 0.1 |
+| <a name="module_egress_rule"></a> [egress\_rule](#module\_egress\_rule) | terraform.registry.launch.nttdata.com/module_primitive/vpc_security_group_egress_rule/aws | ~> 0.1 |
+| <a name="module_ecs_task"></a> [ecs\_task](#module\_ecs\_task) | terraform.registry.launch.nttdata.com/module_collection/ecs_task/aws | ~> 1.0 |
 | <a name="module_ecs_service"></a> [ecs\_service](#module\_ecs\_service) | ../../ | n/a |
 
 ## Resources

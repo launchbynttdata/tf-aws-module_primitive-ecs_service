@@ -69,11 +69,18 @@ resource "aws_ecs_cluster" "this" {
   name = var.ecs_cluster_name
 }
 
+resource "random_string" "task_family_suffix" {
+  length  = 8
+  numeric = true
+  special = false
+  upper   = false
+}
+
 module "ecs_task" {
   source  = "terraform.registry.launch.nttdata.com/module_collection/ecs_task/aws"
   version = "~> 1.0"
 
-  ecs_task_family = var.ecs_task_family
+  ecs_task_family = "${var.ecs_task_family}-${random_string.task_family_suffix.result}"
   container_name  = var.container_name
   container_image = var.container_image
 

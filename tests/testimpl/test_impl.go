@@ -32,11 +32,11 @@ func TestComposableComplete(t *testing.T, ctx testTypes.TestContext) {
 	ecsClient := GetAWSECSClient(t)
 
 	// Get outputs from Terraform
-	serviceName := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_name")
-	clusterName := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_cluster_name")
-	desiredCountStr := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_desired_count")
-	taskDefinition := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_task_definition")
-	launchType := terraform.Output(t, ctx.TerratestTerraformOptions(), "ecs_service_launch_type")
+	serviceName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "ecs_service_name")
+	clusterName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "ecs_cluster_name")
+	desiredCountStr := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "ecs_service_desired_count")
+	taskDefinition := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "ecs_service_task_definition")
+	launchType := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "ecs_service_launch_type")
 
 	// Convert desired_count to int
 	desiredCount := 0

@@ -48,6 +48,7 @@ module "ingress_rule" {
   version = "~> 0.1"
 
   security_group_id = module.security_group.id
+  description       = "Allow inbound traffic for ECS service integration test"
   ip_protocol       = var.ingress_ip_protocol
   from_port         = var.ingress_from_port
   to_port           = var.ingress_to_port
@@ -59,6 +60,7 @@ module "egress_rule" {
   version = "~> 0.1"
 
   security_group_id = module.security_group.id
+  description       = "Allow outbound traffic for ECS service integration test"
   ip_protocol       = var.egress_ip_protocol
   from_port         = var.egress_from_port
   to_port           = var.egress_to_port

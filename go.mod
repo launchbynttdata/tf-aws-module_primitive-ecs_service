@@ -1,4 +1,4 @@
-module github.com/launchbynttdata/tf-aws-module-template
+module github.com/launchbynttdata/tf-aws-module_primitive-ecs_service
 
 go 1.26.7
 

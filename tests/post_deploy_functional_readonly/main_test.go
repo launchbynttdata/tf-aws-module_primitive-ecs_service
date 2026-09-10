@@ -17,7 +17,7 @@ import (
 
 	"github.com/launchbynttdata/lcaf-component-terratest/lib"
 	"github.com/launchbynttdata/lcaf-component-terratest/types"
-	"github.com/launchbynttdata/tf-aws-module-template/tests/testimpl"
+	"github.com/launchbynttdata/tf-aws-module_primitive-ecs_service/tests/testimpl"
 )
 
 const (
@@ -25,12 +25,17 @@ const (
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 
-func TestModule(t *testing.T) {
+func TestECSServiceModuleReadonly(t *testing.T) {
 
 	ctx := types.CreateTestContextBuilder().
 		SetTestConfig(&testimpl.ThisTFModuleConfig{}).
 		SetTestConfigFolderName(testConfigsExamplesFolderDefault).
 		SetTestConfigFileName(infraTFVarFileNameDefault).
+		SetTestSpecificFlags(map[string]types.TestFlags{
+			"simple": {
+				"IS_TERRAFORM_IDEMPOTENT_APPLY": true,
+			},
+		}).
 		Build()
 
 	lib.RunNonDestructiveTest(t, *ctx, testimpl.TestComposableComplete)

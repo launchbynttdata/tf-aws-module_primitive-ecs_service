@@ -5,10 +5,10 @@ go 1.26.7
 tool github.com/golangci/golangci-lint/v2/cmd/golangci-lint
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.45.1
+	github.com/aws/aws-sdk-go-v2 v1.46.0
 	github.com/aws/aws-sdk-go-v2/config v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.93.0
-	github.com/aws/aws-sdk-go-v2/service/sts v1.47.1
+	github.com/aws/aws-sdk-go-v2/service/sts v1.49.0
 	github.com/gruntwork-io/terratest v1.0.1
 	github.com/launchbynttdata/lcaf-component-terratest v1.0.4
 	github.com/stretchr/testify v1.12.1
@@ -50,9 +50,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.20.1 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.19.1 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager v0.1.17 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.1 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.1 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.1 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.5.2 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.8.2 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/v4a v1.5.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/acm v1.38.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.66.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs v1.69.1 // indirect
@@ -64,7 +64,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.19 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/checksum v1.9.14 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.11.22 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.1 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.14.2 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.19.22 // indirect
 	github.com/aws/aws-sdk-go-v2/service/kms v1.50.5 // indirect
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.89.1 // indirect
